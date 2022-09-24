@@ -10,6 +10,7 @@ def snippet_new(request):
 def snippet_edit(request, snippet_id):
     return HttpResponse('スニペットの編集')
 
-
+def snippet_detail(request, snippet_id):
+    return HttpResponse('スニペットの詳細閲覧')
 
 
