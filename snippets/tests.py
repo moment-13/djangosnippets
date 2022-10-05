@@ -35,7 +35,22 @@ class TopPageRenderSnippetsTest(TestCase):
         self.assertContains(response, self.user.username)
 
 
-
+class SnippetDetailTest(TestCase):
+    def setUp(self):
+        self.user = UserModel.objects.create(
+            username="test_user",
+            email="test@example.com",
+            password="secret",
+        )
+        self.snippet = Snippet.objects.create(
+            title="タイトル",
+            code="コード",
+            desscription="解説",
+            created_by=self.user,
+        )
+    
+    def test_should_use_expected_template(self):
+        response = self.client.get("/snippets/%s/" % self.snipp)
 
 
 
