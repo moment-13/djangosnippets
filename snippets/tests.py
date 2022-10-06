@@ -50,7 +50,13 @@ class SnippetDetailTest(TestCase):
         )
     
     def test_should_use_expected_template(self):
-        response = self.client.get("/snippets/%s/" % self.snipp)
+        response = self.client.get("/snippets/%s/" % self.snippet.id)
+        self.assertTemplateUsed(response, "snippets/snippet_detail.html")
+
+    def test_top_page_returns_200_and_expected_heading(self):
+        response = self.client.get("/snippets/%s/" % self.snippet.id)
+        self.assertContains(response, self.snippet.title, status_code=200)
+        
 
 
 
