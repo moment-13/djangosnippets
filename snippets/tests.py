@@ -61,3 +61,31 @@ class SnippetDetailTest(TestCase):
 
 
 
+
+
+
+class CreateSnippetTest(TestCase):
+    def setUp(self):
+        self.user = UserModel.objects.create(
+            username="test_user",
+            email="test@example.com",
+            password="secret",
+        )
+        self.client.force_login(self.user) #ユーザーログイン
+    
+    def test_render_creation_from(self):
+        response = self.cllient.get("/snippets/new/")
+        self.assertContains(response, "スニペットの登録", status_code=200)
+
+    def test_create_anippet(self):
+        data = {'title': 'タイトル', 'code': 'コード', 'description': '解説'}
+        self.client.post("/snippets/new/", data)
+        snippet = Snippet.objects.get(title='タイトル')
+        self.assertEqual('コード', snippet.code)
+        self.assertEqual('解説', snippet.description)
+
+
+
+
+
+
