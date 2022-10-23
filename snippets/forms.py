@@ -1,7 +1,8 @@
 from socket import fromshare
+from xml.etree.ElementTree import Comment
 from django import forms
 
-from snippets.models import Snippet
+from snippets.models import Snippet, Comment
 
 class SnippetForm(forms.ModelForm):
     class Meta:
@@ -10,3 +11,7 @@ class SnippetForm(forms.ModelForm):
 
 
 
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('text',)
